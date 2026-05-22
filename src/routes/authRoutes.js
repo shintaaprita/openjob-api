@@ -9,10 +9,10 @@ const { registerSchema, loginSchema } = require('../validators/schema');
 // 1. REGISTER NEW USER (PUBLIC)
 router.post('/users', validate(registerSchema), async (req, res, next) => {
   try {
-    const { username, password, fullname } = req.body;
+    const { username, password, fullname, email } = req.body;
     
-    // Sesuaikan dengan fungsi di authService kamu (pastikan parameternya pas)
-    const newUser = await authService.registerUser({ username, password, fullname });
+    // Meneruskan email ke dalam parameter authService
+    const newUser = await authService.registerUser({ username, password, fullname, email });
     
     res.status(201).json({
       status: 'success',
